@@ -9,20 +9,25 @@ import com.example.realtimedatabase.datos.Persona
 
 class PersonaAdapter(private val context: Activity, var personas: List<Persona>) :
     ArrayAdapter<Persona>(context, R.layout.persona_layout, personas) {
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup):
-View {
-        // Metodo invocado tantas veces como elementos tenga la colección personas
-        // para formar cada ítem que se visualizará en la lista personalizada
+
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val layoutInflater = context.layoutInflater
         val rowView: View = convertView ?: layoutInflater.inflate(R.layout.persona_layout, parent, false)
-        // Obtener las vistas del diseño
+
         val tvNombre = rowView.findViewById<TextView>(R.id.tvNombre)
         val tvDUI = rowView.findViewById<TextView>(R.id.tvDUI)
-        // Obtener el objeto Persona en la posición actual
+        val tvFechaNacimiento = rowView.findViewById<TextView>(R.id.tvFechaNacimiento)
+        val tvGenero = rowView.findViewById<TextView>(R.id.tvGenero)
+        val tvPesoAltura = rowView.findViewById<TextView>(R.id.tvPesoAltura)
+
         val persona = personas[position]
-        // Establecer los datos en las vistas
-        tvNombre.text = "Nombre: ${persona.nombre}"
-        tvDUI.text = "DUI: ${persona.dui}"
+
+        tvNombre.text = "Nombre: ${persona.nombre ?: ""}"
+        tvDUI.text = "DUI: ${persona.dui ?: ""}"
+        tvFechaNacimiento.text = "Fecha Nacimiento: ${persona.fechaNacimiento ?: ""}"
+        tvGenero.text = "Género: ${persona.genero ?: ""}"
+        tvPesoAltura.text = "Peso: ${persona.peso ?: ""} | Altura: ${persona.altura ?: ""}"
+
         return rowView
     }
 }

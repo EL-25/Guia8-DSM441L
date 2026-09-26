@@ -1,36 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/main"
-    android:padding="16dp">
-    <EditText
-        android:id="@+id/edtNombre"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre"
-        android:inputType="text"
-        android:minHeight="48dp" />
-    <EditText
-        android:id="@+id/edtDUI"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="DUI"
-        android:inputType="text"
-        android:minHeight="48dp" />
-    <Button
-        android:id="@+id/btnGuardar"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="Guardar"
-        android:layout_gravity="center_horizontal"
-        android:onClick="guardar" />
-    <Button
-        android:id="@+id/btnCancelar"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:onClick="cancelar"
-        android:text="Cancelar" />
-</LinearLayout>
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/edtNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre completo"
+            android:inputType="text"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/edtDUI"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="DUI (ej: 00000000-0)"
+            android:inputType="text"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/edtFechaNacimiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Fecha de nacimiento (DD/MM/AAAA)"
+            android:inputType="date"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/edtGenero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Género (ej: Masculino, Femenino)"
+            android:inputType="text"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/edtPeso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Peso (kg / lb)"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/edtAltura"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Altura (cm / m)"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp" />
+
+        <Button
+            android:id="@+id/btnGuardar"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:onClick="guardar"
+            android:text="Guardar" />
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="cancelar"
+            android:text="Cancelar" />
+
+    </LinearLayout>
+</ScrollView>

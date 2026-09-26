@@ -37,7 +37,8 @@ class MainActivity : AppCompatActivity() {
     private fun inicializar() {
         val fabAgregar: FloatingActionButton = findViewById(R.id.fab_agregar)
         listaPersonas = findViewById(R.id.ListaPersonas)
-        // Cuando el usuario haga clic en la lista (para editar registro)
+
+        // Al hacer clic en un elemento para Editar
         listaPersonas!!.setOnItemClickListener { adapterView, view, i, l ->
             val intent = Intent(this, AddPersonaActivity::class.java)
             intent.putExtra("accion", "e") // Editar
@@ -45,14 +46,15 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("key", persona.key)
             intent.putExtra("nombre", persona.nombre)
             intent.putExtra("dui", persona.dui)
+            intent.putExtra("fechaNacimiento", persona.fechaNacimiento)
+            intent.putExtra("genero", persona.genero)
+            intent.putExtra("peso", persona.peso)
+            intent.putExtra("altura", persona.altura)
             startActivity(intent)
         }
-        // Cuando el usuario hace un LongClick (clic sin soltar elemento por más de
-        //2 segundos)
-        // Es porque el usuario quiere eliminar el registro
+
+        // LongClick para eliminar registro
         listaPersonas!!.onItemLongClickListener = AdapterView.OnItemLongClickListener { adapterView, view, position, l ->
-            // Preparando cuadro de diálogo para preguntar al usuario
-            // Si está seguro de eliminar o no el registro
             val ad = AlertDialog.Builder(this@MainActivity)
             ad.setMessage("¿Está seguro de eliminar el registro?")
                 .setTitle("Confirmación")
@@ -60,56 +62,46 @@ class MainActivity : AppCompatActivity() {
                 personas!![position].key?.let {
                     refPersonas.child(it).removeValue()
                 }
-                Toast.makeText(
-                    this@MainActivity,
-                    "Registro borrado!",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this@MainActivity, "Registro borrado!", Toast.LENGTH_SHORT).show()
             }
             ad.setNegativeButton("No") { dialog, id ->
-                Toast.makeText(
-                    this@MainActivity,
-                    "Operación de borrado cancelada!",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this@MainActivity, "Operación de borrado cancelada!", Toast.LENGTH_SHORT).show()
             }
             ad.show()
             true
         }
+
+        // Al hacer clic para Agregar nuevo registro
         fabAgregar.setOnClickListener {
-            // Cuando el usuario quiere agregar un nuevo registro
             val intent = Intent(this, AddPersonaActivity::class.java)
             intent.putExtra("accion", "a") // Agregar
             intent.putExtra("key", "")
             intent.putExtra("nombre", "")
             intent.putExtra("dui", "")
-            intent.putExtra("apellido", "")
-            intent.putExtra("telefono", "")
-            intent.putExtra("edad", "")
-            intent.putExtra("direccion", "")
+            intent.putExtra("fechaNacimiento", "")
+            intent.putExtra("genero", "")
+            intent.putExtra("peso", "")
+            intent.putExtra("altura", "")
             startActivity(intent)
         }
+
         personas = ArrayList()
-        // Cambiarlo refPersonas a consultaOrdenada para ordenar lista
+
+        // Escuchador de Firebase en tiempo real
         consultaOrdenada.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Procedimiento que se ejecuta cuando hubo algún cambio
-                // en la base de datos
-                // Se actualiza la colección de personas
                 personas!!.clear()
                 for (dato in dataSnapshot.children) {
                     val persona: Persona? = dato.getValue(Persona::class.java)
-                    persona?.key = dato.key // Asigna la clave generada por Firebase
+                    persona?.key = dato.key
                     if (persona != null) {
                         personas!!.add(persona)
                     }
                 }
-                val adapter = PersonaAdapter(
-                    this@MainActivity,
-                    personas as ArrayList<Persona>
-                )
+                val adapter = PersonaAdapter(this@MainActivity, personas as ArrayList<Persona>)
                 listaPersonas!!.adapter = adapter
             }
+
             override fun onCancelled(databaseError: DatabaseError) {}
         })
     }
