@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "467451780113",
+    "firebase_url": "https://fir-dbrealtime-128ec-default-rtdb.firebaseio.com",
+    "project_id": "fir-dbrealtime-128ec",
+    "storage_bucket": "fir-dbrealtime-128ec.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:467451780113:android:d83cd68b92e9fa141565b0",
+        "android_client_info": {
+          "package_name": "com.example.realtimedatabase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkyIWQNGWQxCba2HXHvRKORbWCFcqdpl0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
